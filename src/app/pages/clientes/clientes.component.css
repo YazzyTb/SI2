@@ -89,22 +89,42 @@ h2 {
   cursor: pointer;
   font-size: 14px;
 }
-
-.icon-button.ver {
-  background-color: #17a2b8;
-  color: white;
-}
-
-.icon-button.editar {
-  background-color: #ffc107;
-  color: black;
-}
-
-.icon-button.eliminar {
-  background-color: #dc3545;
-  color: white;
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .icon-button:hover {
-  opacity: 0.9;
+  transform: scale(1.2);
+}
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.paginacion button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.paginacion button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paginacion span {
+  font-weight: 500;
+  color: #444;
 }

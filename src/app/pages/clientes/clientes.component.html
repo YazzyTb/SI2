@@ -3,11 +3,6 @@
 
   <div class="filtros">
     <input type="text" [(ngModel)]="filtro" placeholder="🔍 Buscar cliente..." class="buscador" />
-    <select [(ngModel)]="estadoFiltro" class="filtro-select">
-      <option value="">Todos</option>
-      <option value="activo">Activo</option>
-      <option value="inactivo">Inactivo</option>
-    </select>
     <button routerLink="/clientes/crear" class="btn-agregar">➕ Agregar cliente</button>
   </div>
 
@@ -18,21 +13,16 @@
         <th>Teléfono</th>
         <th>Gmail</th>
         <th>NIT</th>
-        <th>Estado</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let c of clientesFiltrados">
+      <tr *ngFor="let c of clientesPaginados">
         <td>{{ c.nombre }} {{ c.apellido }}</td>
         <td>{{ c.telefono }}</td>
         <td>{{ c.gmail }}</td>
         <td>{{ c.nit || '—' }}</td>
-        <td>
-          <span [ngClass]="{ 'activo': c.estado === 'activo', 'inactivo': c.estado === 'inactivo' }">
-            {{ c.estado }}
-          </span>
-        </td>
+        
         <td class="acciones">
           <button class="icon-button ver" [routerLink]="['/clientes', c.id]" title="Ver">👁️</button>
           <button class="icon-button editar" [routerLink]="['/clientes/editar', c.id]" title="Editar">🖊️</button>
@@ -41,4 +31,10 @@
       </tr>
     </tbody>
   </table>
+  <!-- Paginación -->
+<div class="paginacion">
+  <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">⬅️ Anterior</button>
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+  <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente ➡️</button>
+</div>
 </div>

@@ -14,7 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-
+  verPassword: boolean = false;
+  
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {

@@ -1,0 +1,52 @@
+.bitacora {
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  
+  .search-container input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 220px;
+  }
+  
+  .filter-button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4067c2;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .filter-button:hover {
+    background-color: #2d4c9a;
+  }
+  
+  .bitacora-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff8f8;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
+  
+  .bitacora-table th, .bitacora-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .bitacora-table thead th {
+    background-color: #e3e3e3;
+    font-weight: bold;
+  }
+  

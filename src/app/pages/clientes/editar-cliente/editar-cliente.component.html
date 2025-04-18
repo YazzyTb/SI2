@@ -1,0 +1,29 @@
+<div class="editar-cliente">
+    <h2>Editar Cliente</h2>
+    <form (ngSubmit)="guardarCambios()">
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="cliente.nombre" name="nombre" required />
+  
+      <label>Apellido:</label>
+      <input type="text" [(ngModel)]="cliente.apellido" name="apellido" required />
+  
+      <label>Teléfono:</label>
+      <input type="text" [(ngModel)]="cliente.telefono" name="telefono" required />
+  
+      <label>NIT:</label>
+      <input type="text" [(ngModel)]="cliente.nit" name="nit" />
+  
+      <label>Correo (Gmail):</label>
+      <input type="email" [(ngModel)]="cliente.gmail" name="gmail" required />
+  
+      <label>Estado:</label>
+      <select [(ngModel)]="cliente.estado" name="estado">
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+  
+      <button type="submit">Guardar</button>
+      <button type="button" (click)="volver()" class="volver">Volver</button>
+    </form>
+  </div>
+  

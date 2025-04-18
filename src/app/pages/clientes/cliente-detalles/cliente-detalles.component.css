@@ -1,0 +1,41 @@
+.cliente-detalles {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .cliente-detalles h2 {
+    margin-bottom: 16px;
+  }
+  
+  .cliente-detalles p {
+    margin: 8px 0;
+  }
+  
+  .cliente-detalles span.activo {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .cliente-detalles span.inactivo {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .cliente-detalles button {
+    margin-top: 16px;
+    padding: 8px 14px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .cliente-detalles button:hover {
+    background-color: #3366cc;
+  }
+  

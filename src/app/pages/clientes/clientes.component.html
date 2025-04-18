@@ -1,0 +1,44 @@
+<div class="clientes-container">
+  <h2>👨‍💼 Gestión de Clientes</h2>
+
+  <div class="filtros">
+    <input type="text" [(ngModel)]="filtro" placeholder="🔍 Buscar cliente..." class="buscador" />
+    <select [(ngModel)]="estadoFiltro" class="filtro-select">
+      <option value="">Todos</option>
+      <option value="activo">Activo</option>
+      <option value="inactivo">Inactivo</option>
+    </select>
+    <button routerLink="/clientes/crear" class="btn-agregar">➕ Agregar cliente</button>
+  </div>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Gmail</th>
+        <th>NIT</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientesFiltrados">
+        <td>{{ c.nombre }} {{ c.apellido }}</td>
+        <td>{{ c.telefono }}</td>
+        <td>{{ c.gmail }}</td>
+        <td>{{ c.nit || '—' }}</td>
+        <td>
+          <span [ngClass]="{ 'activo': c.estado === 'activo', 'inactivo': c.estado === 'inactivo' }">
+            {{ c.estado }}
+          </span>
+        </td>
+        <td class="acciones">
+          <button class="icon-button ver" [routerLink]="['/clientes', c.id]" title="Ver">👁️</button>
+          <button class="icon-button editar" [routerLink]="['/clientes/editar', c.id]" title="Editar">🖊️</button>
+          <button class="icon-button eliminar" (click)="eliminarCliente(c.id)" title="Eliminar">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

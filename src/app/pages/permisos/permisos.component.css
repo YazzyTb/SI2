@@ -1,0 +1,84 @@
+.permisos-container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buscador {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+.btn-agregar {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #54abda;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-agregar:hover {
+  background-color: #234dad;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.tabla th {
+  background-color: #f4f4f4;
+}
+
+
+.acciones {
+  white-space: nowrap;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 0 5px;
+  transition: transform 0.2s;
+}
+
+.icon-button:hover {
+  transform: scale(1.2);
+}
+
+.icon-button.editar { color: #4a90e2; }
+.icon-button.eliminar { color: #e25d5d; }

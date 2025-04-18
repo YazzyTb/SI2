@@ -1,0 +1,43 @@
+<div class="inventario">
+    <div class="inventario-header">
+      <h2>Inventario</h2>
+      <a routerLink="/inventario/crear" class="nuevo-producto">+ Nuevo producto</a>
+    </div>
+    <input type="text" [(ngModel)]="filtro" placeholder="🔍 Buscar producto..." class="buscador" />
+  
+    <table class="inventario-table">
+        <thead>
+            <tr>
+              <th (click)="ordenarPor('id')">
+                ID <span [innerHTML]="flechaOrden('id')" [class.activa]="orden === 'id'"></span>
+              </th>
+              <th (click)="ordenarPor('nombre')">
+                Nombre <span [innerHTML]="flechaOrden('nombre')" [class.activa]="orden === 'nombre'"></span>
+              </th>
+              <th (click)="ordenarPor('precio')">
+                Precio <span [innerHTML]="flechaOrden('precio')" [class.activa]="orden === 'precio'"></span>
+              </th>
+              <th (click)="ordenarPor('stock')">
+                Stock <span [innerHTML]="flechaOrden('stock')" [class.activa]="orden === 'stock'"></span>
+              </th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+                  
+          
+      <tbody>
+        <tr *ngFor="let p of productosFiltrados">
+            <td>{{ p.id }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.precio }}</td>
+            <td>{{ p.stock }}</td>
+            <td class="acciones">
+              <button class="icon-button editar" [routerLink]="['/inventario/editar', p.id]">🖊️</button>
+              <button class="icon-button eliminar" (click)="eliminarProducto(p.id)">🗑️</button>
+            </td>
+          </tr>
+          
+      </tbody>
+    </table>
+  </div>
+  

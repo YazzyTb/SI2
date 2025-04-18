@@ -1,0 +1,11 @@
+<div class="cliente-detalles" *ngIf="cliente">
+    <h2>Detalles del Cliente</h2>
+    <p><strong>Nombre:</strong> {{ cliente.nombre }}</p>
+    <p><strong>Apellido:</strong> {{ cliente.apellido }}</p>
+    <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+    <p><strong>NIT:</strong> {{ cliente.nit || 'No registrado' }}</p>
+    <p><strong>Correo:</strong> {{ cliente.gmail }}</p>
+    <p><strong>Estado:</strong> <span [ngClass]="cliente.estado">{{ cliente.estado }}</span></p>
+  
+    <button (click)="volver()">Volver</button>
+  </div>

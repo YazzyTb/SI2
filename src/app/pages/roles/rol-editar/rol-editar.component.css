@@ -1,0 +1,58 @@
+.editar-rol {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .editar-rol h2 {
+    margin-bottom: 16px;
+  }
+  
+  .editar-rol label {
+    display: block;
+    margin: 10px 0 4px;
+  }
+  
+  .editar-rol input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .checkboxes {
+    margin-bottom: 16px;
+  }
+  
+  .checkboxes div {
+    margin: 5px 0;
+  }
+  
+  .editar-rol button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 8px;
+  }
+  
+  .editar-rol button.volver {
+    background-color: #ccc;
+    color: #333;
+  }
+  
+  .editar-rol button:hover:not(.volver) {
+    background-color: #3366cc;
+  }
+  
+  .editar-rol button.volver:hover {
+    background-color: #999;
+  }
+  

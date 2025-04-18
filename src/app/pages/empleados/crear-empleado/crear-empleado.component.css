@@ -1,0 +1,86 @@
+.crear-container {
+  max-width: 420px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 20px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input, select {
+  padding: 7px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+
+.input-password {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.input-password input {
+  flex: 1;
+}
+
+.ver-btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  border: none;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ver-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button.volver {
+  background-color: #ccc;
+  color: black;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+span {
+  font-size: 12px;
+}

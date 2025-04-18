@@ -1,0 +1,26 @@
+<div class="crear-permiso">
+    <h2>Registrar Permiso</h2>
+    <form (ngSubmit)="registrarPermiso()">
+      <label>ID:</label>
+      <input type="text" [(ngModel)]="permiso.id" name="id" required />
+  
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="permiso.nombre" name="nombre" required />
+  
+      <label>Descripción:</label>
+      <input type="text" [(ngModel)]="permiso.descripcion" name="descripcion" required />
+  
+      <button type="submit">Guardar</button>
+      <button type="button" class="volver" (click)="volver()">Volver</button>
+    </form>
+  
+    <div *ngIf="permisos.length">
+      <h3>Permisos registrados:</h3>
+      <ul>
+        <li *ngFor="let p of permisos">
+          <strong>{{ p.id }}</strong> - {{ p.nombre }} ({{ p.descripcion }})
+        </li>
+      </ul>
+    </div>
+  </div>
+  

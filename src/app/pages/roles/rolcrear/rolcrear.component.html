@@ -1,0 +1,23 @@
+<p>rolcrear works!</p>
+<div class="crear-rol">
+    <h2>Registrar Nuevo Rol</h2>
+    <form (ngSubmit)="guardarRol()">
+      <label>Nombre del rol:</label>
+      <input type="text" [(ngModel)]="rol.nombre" name="nombre" required />
+  
+      <label>Descripción:</label>
+      <input type="text" [(ngModel)]="rol.descripcion" name="descripcion" required />
+  
+      <label>Permisos:</label>
+      <div class="checkboxes">
+        <div *ngFor="let permiso of permisosDisponibles">
+          <input type="checkbox" [value]="permiso.id" (change)="togglePermiso(permiso.id)" [checked]="rol.permisosSeleccionados.includes(permiso.id)" />
+          {{ permiso.nombre }}
+        </div>
+      </div>
+  
+      <button type="submit">Guardar</button>
+      <button type="button" class="volver" (click)="volver()">Volver</button>
+    </form>
+  </div>
+  

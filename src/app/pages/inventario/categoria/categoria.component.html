@@ -1,0 +1,44 @@
+<div class="contenedor-categoria">
+  <h2>📂 Gestión de Categorías</h2>
+
+  <form (ngSubmit)="agregarCategoria()" class="formulario">
+    <input [(ngModel)]="nuevaCategoria" name="categoria" placeholder="Nombre de la nueva categoría" required />
+    <button type="submit">➕ Agregar</button>
+  </form>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let categoria of categorias">
+        <td>{{ categoria.id }}</td>
+
+        <td *ngIf="editando && categoria.id === categoriaEditando?.id">
+          <input [(ngModel)]="categoriaEditando.nombre" name="editNombre{{categoria.id}}" />
+        </td>
+
+        <td *ngIf="!editando || categoria.id !== categoriaEditando?.id">
+          {{ categoria.nombre }}
+        </td>
+
+        <td>
+          <ng-container *ngIf="editando && categoria.id === categoriaEditando?.id; else botonesDefault">
+            <button (click)="guardarEdicion()">💾 Guardar</button>
+            <button (click)="cancelarEdicion()">❌ Cancelar</button>
+          </ng-container>
+          <ng-template #botonesDefault>
+            <button (click)="iniciarEdicion(categoria)">✏️ Editar</button>
+            <button (click)="eliminar(categoria.id)">🗑️ Eliminar</button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="volver()" class="volver">🔙 Volver</button>
+</div>

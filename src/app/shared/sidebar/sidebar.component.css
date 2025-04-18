@@ -1,0 +1,57 @@
+.sidebar {
+  width: 240px;
+  background-color: #0f1d2d;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.hidden-mobile {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .hidden-mobile {
+    display: block !important;
+  }
+}
+
+/* restante sin cambios */
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 0;
+  font-size: 15px;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar nav ul ul {
+  padding-left: 16px;
+  margin-top: 5px;
+}
+
+.rotated {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}

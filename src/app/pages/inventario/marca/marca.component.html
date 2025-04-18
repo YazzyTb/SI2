@@ -1,0 +1,51 @@
+<div class="contenedor-marca">
+  <h2>📦 Gestión de Marcas</h2>
+
+  <!-- Formulario para agregar nueva marca -->
+  <form (ngSubmit)="agregarMarca()" class="formulario">
+    <input [(ngModel)]="nuevamarca" name="marca" placeholder="Nombre de la nueva marca" required />
+    <button type="submit">➕ Agregar</button>
+  </form>
+
+  <!-- Tabla de marcas -->
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let marca of marcas">
+        <td>{{ marca.id }}</td>
+
+        <!-- Modo edición -->
+        <td *ngIf="editando && marca.id === marcaEditando?.id">
+          <input [(ngModel)]="marcaEditando.nombre" name="editNombre{{marca.id}}" />
+        </td>
+
+        <!-- Modo normal -->
+        <td *ngIf="!editando || marca.id !== marcaEditando?.id">
+          {{ marca.nombre }}
+        </td>
+
+        <!-- Acciones -->
+        <td>
+          <!-- Botones de edición -->
+          <ng-container *ngIf="editando && marca.id === marcaEditando?.id; else botonesDefault">
+            <button (click)="guardarEdicion()">💾 Guardar</button>
+            <button (click)="cancelarEdicion()">❌ Cancelar</button>
+          </ng-container>
+          <ng-template #botonesDefault>
+            <button (click)="iniciarEdicion(marca)">✏️ Editar</button>
+            <button (click)="eliminar(marca.id)">🗑️ Eliminar</button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Botón para volver -->
+  <button (click)="volver()" class="volver">🔙 Volver</button>
+</div>

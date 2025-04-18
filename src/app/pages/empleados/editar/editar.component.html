@@ -1,0 +1,33 @@
+<div class="editar-container">
+  <h2>✏️ Editar Empleado</h2>
+
+  <form (ngSubmit)="guardarCambios()" #formEdit="ngForm" class="formulario">
+    <label>Nombre:</label>
+    <input [(ngModel)]="empleado.nombre" name="nombre" required />
+
+    <label>Apellido:</label>
+    <input [(ngModel)]="empleado.apellido" name="apellido" required />
+
+    <label>Correo:</label>
+    <input [(ngModel)]="empleado.gmail" name="gmail" type="email" required />
+
+    <label>Telefono:</label>
+    <input [(ngModel)]="empleado.telefono" name="telefono"  required />
+
+    <label>Rol:</label>
+    <select [(ngModel)]="empleado.rol_id" name="rol_id" required>
+      <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+    </select>
+
+    <label>Estado:</label>
+    <select [(ngModel)]="empleado.estado" name="estado" required>
+      <option value="activo">Activo</option>
+      <option value="inactivo">Inactivo</option>
+    </select>
+
+    <div class="acciones">
+      <button type="submit">💾 Guardar</button>
+      <button type="button" class="volver" (click)="volver()">🔙 Volver</button>
+    </div>
+  </form>
+</div>

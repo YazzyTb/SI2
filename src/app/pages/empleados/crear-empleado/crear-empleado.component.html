@@ -1,0 +1,59 @@
+<div class="crear-container">
+  <h2>➕ Registrar Nuevo Empleado</h2>
+
+  <form (ngSubmit)="crearEmpleado()" #formCrear="ngForm" class="formulario">
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="empleado.nombre" name="nombre" required />
+
+    <label>Apellido:</label>
+    <input type="text" [(ngModel)]="empleado.apellido" name="apellido" required />
+
+    <label>Correo:</label>
+    <input
+      type="email"
+      [(ngModel)]="empleado.gmail"
+      name="gmail"
+      (blur)="validarCorreo()"
+      required
+    />
+    <span *ngIf="cargandoCorreo">🔄 Verificando correo...</span>
+    <span *ngIf="correoExiste" style="color: red;">⚠️ El correo ya está registrado</span>
+
+    <label>Contraseña:</label>
+    <div class="input-password">
+      <input
+        [type]="verPassword ? 'text' : 'password'"
+        [(ngModel)]="empleado.contrasena"
+        name="contrasena"
+        required
+      />
+      <button type="button" class="ver-btn" (click)="verPassword = !verPassword">
+        {{ verPassword ? '🙈 Ocultar' : '👁️ Ver' }}
+      </button>
+    </div>
+
+    <label>Teléfono:</label>
+    <input
+      type="text"
+      [(ngModel)]="empleado.telefono"
+      name="telefono"
+      required
+    />
+
+    <label>Rol:</label>
+    <select [(ngModel)]="empleado.rol_nombre" name="rol_nombre" required>
+      <option *ngFor="let rol of roles" [value]="rol.nombre">{{ rol.nombre }}</option>
+    </select>
+
+    <label>Estado:</label>
+    <select [(ngModel)]="empleado.estado" name="estado" required>
+      <option value="activo">Activo</option>
+      <option value="inactivo">Inactivo</option>
+    </select>
+
+    <div class="acciones">
+      <button type="submit" [disabled]="correoExiste">💾 Guardar</button>
+      <button type="button" class="volver" (click)="volver()">🔙 Volver</button>
+    </div>
+  </form>
+</div>

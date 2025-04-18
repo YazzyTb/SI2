@@ -1,0 +1,48 @@
+<aside class="sidebar">
+  <nav>
+    <h2 class="brand">🛒 Smarth Shop</h2>
+    <ul>
+      <li><a routerLink="/bitacora">📋 Bitácora</a></li>
+
+      <li>
+        <div class="dropdown-toggle" (click)="toggleDropdown('empleados')">
+          👥 Empleados
+          <span [class.rotated]="dropdowns['empleados']">▼</span>
+        </div>
+        <ul *ngIf="dropdowns?.['empleados']">
+          <li><a routerLink="/empleados">👤 Lista de empleados</a></li>
+          <li><a routerLink="/roles">🧩 Roles</a></li>
+          <li><a routerLink="/permisos">🔐 Permisos</a></li>
+        </ul>
+      </li>
+
+      <li><a routerLink="/clientes">👨‍💼 Clientes</a></li>
+
+      <li>
+        <div class="dropdown-toggle" (click)="toggleDropdown('inventario')">
+          📦 Inventario
+          <span [class.rotated]="dropdowns['inventario']">▼</span>
+        </div>
+        <ul *ngIf="dropdowns?.['inventario']">
+          <li><a routerLink="/inventario">📋 Lista de productos</a></li>
+          <li><a routerLink="/categorias">📁 Categorías</a></li>
+          <li><a routerLink="/marcas">🏷️ Marcas</a></li>
+        </ul>
+      </li>
+
+      <li><a routerLink="/ventas">💸 Ventas</a></li>
+      <li>
+        <div class="dropdown-toggle" (click)="toggleDropdown('reportes')">
+          📁 Reportes
+          <span [class.rotated]="dropdowns['reportes']">▼</span>
+        </div>
+        <ul *ngIf="dropdowns?.['reportes']">
+          <li><a routerLink="/reportes">📋 Lista de reportes</a></li>
+          <li><a routerLink="/Factura">🧾 Facturas</a></li>
+        </ul>
+      </li>
+
+      <li><a (click)="cerrarSesion()">🚪 Cerrar sesión</a></li>
+    </ul>
+  </nav>
+</aside>

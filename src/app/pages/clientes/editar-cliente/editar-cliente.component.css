@@ -1,0 +1,51 @@
+.editar-cliente {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .editar-cliente h2 {
+    margin-bottom: 16px;
+  }
+  
+  .editar-cliente label {
+    display: block;
+    margin: 10px 0 4px;
+  }
+  
+  .editar-cliente input,
+  .editar-cliente select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .editar-cliente button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .editar-cliente button.volver {
+    background-color: #ccc;
+    color: #333;
+  }
+  
+  .editar-cliente button:hover:not(.volver) {
+    background-color: #3366cc;
+  }
+  
+  .editar-cliente button.volver:hover {
+    background-color: #999;
+  }
+  

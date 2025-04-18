@@ -1,0 +1,37 @@
+
+<div class="reporte-container">
+    <h2>📊 Generador de Reportes</h2>
+  
+    <div class="filtros">
+      <label for="tipo">Selecciona tipo de reporte:</label>
+      <select [(ngModel)]="tipoReporte" id="tipo">
+        <option value="ventas">Ventas</option>
+        <option value="compras">Compras</option>
+      </select>
+    </div>
+  
+    <table *ngIf="datosFiltrados.length" class="tabla">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Fecha</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mov of datosFiltrados">
+          <td>{{ mov.producto }}</td>
+          <td>{{ mov.cantidad }}</td>
+          <td>{{ mov.fecha }}</td>
+          <td>{{ mov.descripcion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="acciones">
+      <button (click)="exportarPDF()">📄 Exportar PDF</button>
+      <button (click)="exportarExcel()">📊 Exportar Excel</button>
+      <button (click)="volver()">🔙 Volver</button>
+    </div>
+  </div>

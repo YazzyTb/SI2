@@ -1,0 +1,28 @@
+<div class="permisos-container">
+  <h2>🔐 Gestión de Permisos</h2>
+
+  <div class="filtros">
+    <input type="text" [(ngModel)]="filtro" placeholder="🔍 Buscar permiso..." class="buscador" />
+    <button routerLink="/permisos/crear" class="btn-agregar">➕ Agregar permiso</button>
+  </div>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of permisosFiltrados">
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }}</td>
+        <td class="acciones">
+          <button class="icon-button editar" [routerLink]="['/permisos/editar', p.id]" title="Editar">🖊️</button>
+          <button class="icon-button eliminar" (click)="eliminarPermiso(p.id)" title="Eliminar">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

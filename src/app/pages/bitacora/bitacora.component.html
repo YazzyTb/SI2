@@ -1,0 +1,27 @@
+<div class="bitacora">
+    <h2>Bitacora</h2>
+    <div class="search-container">
+      <input type="text" placeholder="🔍 Buscar..." [(ngModel)]="searchTerm" />
+      <button class="filter-button" (click)="filtroActivo = !filtroActivo">
+        {{ filtroActivo ? 'Quitar filtro' : 'Filtrar: Solo inicios de sesión' }}
+      </button>
+    </div>
+    <table class="bitacora-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>IP</th>
+          <th>Acción</th>
+          <th>Fecha y hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of registrosFiltrados">
+          <td>{{ r.nombre }}</td>
+          <td>{{ r.ip }}</td>
+          <td>{{ r.accion }}</td>
+          <td>{{ r.fecha }} - {{ r.hora }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

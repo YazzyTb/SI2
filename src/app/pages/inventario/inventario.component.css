@@ -1,0 +1,99 @@
+.inventario {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+  }
+  
+  .inventario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .nuevo-producto {
+    background-color: #4a90e2;
+    color: white;
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nuevo-producto:hover {
+    background-color: #3366cc;
+  }
+  
+  .inventario-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .inventario-table th,
+  .inventario-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .inventario-table th {
+    background-color: #f3f3f3;
+  }
+  
+  .producto-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .acciones {
+    white-space: nowrap;
+  }
+  
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+    transition: transform 0.2s;
+  }
+  
+  .icon-button:hover {
+    transform: scale(1.2);
+  }
+  
+  .icon-button.editar { color: #4a90e2; }
+  .icon-button.eliminar { color: #e25d5d; }
+
+  .buscador {
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  th {
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  th span {
+    margin-left: 6px;
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  th span.activa {
+    color: #000;
+    font-weight: bold;
+  }
+  
+  
+  
+  

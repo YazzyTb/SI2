@@ -1,30 +1,35 @@
-:host {
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #ed3f54;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 22px;
+  border-radius: 5px;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  background-color: #c93445;
+}
+@media (max-width: 970px) {
+  .hamburger {
     display: block;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
   }
-  
-  .layout {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
+}
+
+main.contenido {
+  margin-left: 280px;
+  padding: 20px;
+}
+
+@media (max-width: 970px) {
+  main.contenido {
+    margin-left: 2px;
   }
-  
-  
-  .sidebar {
-    width: 280px;
-    background-color: #0d1b2a;
-  }
-  
-  .main {
-    flex: 1;
-    background: white;
-    padding: 40px;
-    font-size: 17px;
-    overflow: auto;
-  }
-  
+}

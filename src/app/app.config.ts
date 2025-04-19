@@ -24,6 +24,9 @@ import { CategoriaComponent } from './pages/inventario/categoria/categoria.compo
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
+import { VentasComponent } from './pages/ventas/ventas.component';
+import { ResenaComponent } from './pages/resena/resena.component';
+
 export const appConfig = {
   providers: [
     provideHttpClient(),{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -54,7 +57,10 @@ export const appConfig = {
           { path: 'reportes', component: ReportesComponent },
           { path: 'marcas', component: MarcaComponent },
 
-          { path: 'categorias', component: CategoriaComponent }
+          { path: 'categorias', component: CategoriaComponent },
+          { path: 'ventas', component: VentasComponent },
+          { path: 'resena',component: ResenaComponent },
+          
         ]
       }
     ])

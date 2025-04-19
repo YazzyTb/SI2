@@ -1,95 +1,116 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ProductoService } from '../../services/producto.service';
+import { ClienteService } from '../../services/cliente.service';
+import { CategoriaService } from '../../services/categoria.service';
+import { MarcaService } from '../../services/marca.service';
+
 
 @Component({
   selector: 'app-inventario',
   standalone: true,
-  imports: [CommonModule, RouterModule,FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './inventario.component.html',
   styleUrls: ['./inventario.component.css']
 })
-export class InventarioComponent {
+export class InventarioComponent implements OnInit {
   filtro: string = '';
-  orden: string = '';
-  ascendente: boolean = true;
+  productos: any[] = [];
+  clientes: any[] = [];
+  categorias: any[] = [];
+  marcas: any[] = [];
+  metodosPago: any[] = [];
+  paginaActual: number = 1;
+  itemsPorPagina: number = 10;
 
-  productos = [
-    {
-      id: 1,
-      nombre: 'Smartphone X1',
-      stock: 20,
-      stockMinimo: 5,
-      stockMaximo: 100,
-      precio: 1500,
-      descripcion: 'Smartphone con pantalla OLED',
-      categoria: 'Celulares',
-      marca: 'MarcaTech',
-      imagen: 'https://res.cloudinary.com/demo/image/upload/v1690000000/smartphone.png'
-    },
-    {
-      id: 2,
-      nombre: 'Cargador Rápido',
-      stock: 50,
-      stockMinimo: 10,
-      stockMaximo: 200,
-      precio: 100,
-      descripcion: 'Cargador de carga rápida 3.0',
-      categoria: 'Accesorios',
-      marca: 'PowerUp',
-      imagen: 'https://res.cloudinary.com/demo/image/upload/v1690000001/charger.png'
-    }
-  ];
+  constructor(
+    private productoService: ProductoService,
+    private clienteService: ClienteService,
+    private categoriaService: CategoriaService,
+    private marcaService: MarcaService
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+  cargarDatos() {
+    this.productoService.getProductos().subscribe({
+      next: (res) => this.productos = res,
+      error: () => alert('Error al cargar productos')
+    });
+    this.clienteService.getClientes().subscribe({
+      next: (res) => this.clientes = res,
+      error: () => alert('Error al cargar clientes')
+    });
+    this.categoriaService.getCategorias().subscribe({
+      next: (res) => this.categorias = res,
+      error: () => alert('Error al cargar categorías')
+    });
+    this.marcaService.getMarcas().subscribe({
+      next: (res) => this.marcas = res,
+      error: () => alert('Error al cargar marcas')
+    });
+    
+  }
+
+  imagenError(event: Event) {
+    const element = event.target as HTMLImageElement;
+    element.src = 'https://via.placeholder.com/100x100?text=Sin+imagen';
+  }
+  
 
   eliminarProducto(id: number) {
     if (confirm('¿Deseas eliminar este producto?')) {
-      this.productos = this.productos.filter(p => p.id !== id);
-    }
-  }
-  get productosFiltrados() {
-    return this.productos
-      .filter(p =>
-        p.nombre.toLowerCase().includes(this.filtro.toLowerCase())
-      )
-      .sort((a, b) => {
-        if (!this.orden) return 0;
-  
-        const campo = this.orden as keyof typeof a;
-        const valorA = a[campo];
-        const valorB = b[campo];
-  
-        if (typeof valorA === 'string') {
-          return this.ascendente
-            ? valorA.localeCompare(valorB as string)
-            : (valorB as string).localeCompare(valorA);
-        } else {
-          return this.ascendente
-            ? (valorA as number) - (valorB as number)
-            : (valorB as number) - (valorA as number);
-        }
+      this.productoService.eliminarProducto(id).subscribe({
+        next: () => {
+          this.productos = this.productos.filter(p => p.id !== id);
+        },
+        error: () => alert('Error al eliminar producto')
       });
-  }
-  ordenarPor(campo: string) {
-    if (this.orden === campo) {
-      this.ascendente = !this.ascendente;
-    } else {
-      this.orden = campo;
-      this.ascendente = true;
     }
   }
 
-  flechaOrden(campo: string): string {
-    if (this.orden === campo) {
-      return this.ascendente ? '⬆️' : '⬇️';
-    } else {
-      return '↕️';
-    }
+  obtenerNombreCliente(id: number): string {
+    const cliente = this.clientes.find(c => c.id === id);
+    return cliente ? `${cliente.nombre} ${cliente.apellido}` : 'Desconocido';
+  }
+
+  obtenerNombreMarca(id: number): string {
+    const marca = this.marcas.find(m => m.id === id);
+    return marca ? marca.nombre : 'Sin marca';
+  }
+
+  obtenerNombreCategoria(id: number): string {
+    const categoria = this.categorias.find(c => c.id === id);
+    return categoria ? categoria.nombre : 'Sin categoría';
+  }
+  obtenerUrlImagen(producto: any): string {
+    return producto.imagenes?.length ? producto.imagenes[0].image_url : 'assets/img/no-image.png';
   }
   
-  
-  
+
+  get productosFiltrados() {
+    return this.productos.filter(p =>
+      (p.nombre + p.descripcion).toLowerCase().includes(this.filtro.toLowerCase())
+    );
+  }
+
+  get productosPaginados() {
+    const inicio = (this.paginaActual - 1) * this.itemsPorPagina;
+    return this.productosFiltrados.slice(inicio, inicio + this.itemsPorPagina);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.productosFiltrados.length / this.itemsPorPagina);
+  }
+
+  cambiarPagina(direccion: number) {
+    const nueva = this.paginaActual + direccion;
+    if (nueva >= 1 && nueva <= this.totalPaginas) {
+      this.paginaActual = nueva;
+    }
+  }
 }
-  
-  
-  

@@ -1,8 +1,9 @@
-<div class="layout">
-  
-  <app-sidebar [class.hidden]="!sidebarVisible"></app-sidebar>
-    <div class="main">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-  
+<!-- Botón hamburguesa -->
+<button class="hamburger" (click)="toggleSidebar()">☰</button>
+
+<!-- Sidebar con visibilidad -->
+<app-sidebar [isVisible]="sidebarVisible"></app-sidebar>
+
+<main class="contenido">
+  <router-outlet></router-outlet>
+</main>

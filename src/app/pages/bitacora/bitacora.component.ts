@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BitacoraService } from '../../services/bitacora.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-bitacora',
@@ -9,31 +11,73 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './bitacora.component.html',
   styleUrls: ['./bitacora.component.css']
 })
-export class BitacoraComponent {
+export class BitacoraComponent implements OnInit {
   searchTerm = '';
   filtroActivo = false;
+  filtro = '';
+  estadoFiltro = '';
+  bitacora: any[] = [];
+  usuarios: any[] = [];
 
-  registros = [
-    { nombre: 'Administrador', ip: '1.158.123', accion: 'inicio sesión', fecha: '11/04/2025', hora: '16:00' },
-    { nombre: 'Juan Pérez', ip: '192.168.0.1', accion: 'modificó usuario', fecha: '10/04/2025', hora: '12:45' },
-    { nombre: 'Laura Mendoza', ip: '192.168.0.15', accion: 'cerró sesión', fecha: '10/04/2025', hora: '18:10' }
-  ];
-
-  get registrosFiltrados() {
-    let resultado = this.registros;
-
-    if (this.searchTerm) {
-      resultado = resultado.filter(reg =>
-        reg.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        reg.accion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        reg.ip.includes(this.searchTerm)
-      );
+  constructor(private BitacoraService: BitacoraService,
+    private UsuarioService: UsuarioService) {}
+    ngOnInit(): void {
+      this.cargarRegistro();
+      this.cargarUsuarios();
     }
-
-    if (this.filtroActivo) {
-      resultado = resultado.filter(reg => reg.accion.includes('inicio'));
+  
+    cargarRegistro() {
+      this.BitacoraService.getBitacora().subscribe({
+        next: (res) => this.bitacora = res,
+        error: (err) => alert('No se puede cargar bitácora')
+      });
     }
+  
+    cargarUsuarios() {
+      this.UsuarioService.getUsuarios().subscribe({
+        next: (res) => this.usuarios = res,
+        error: (err) => alert('No se pueden cargar usuarios')
+      });
+    }
+  
+    obtenerNombreUsuario(usuarioId: number): string {
+      if (!this.usuarios || this.usuarios.length === 0) return 'Cargando...';
+      const usuario = this.usuarios.find(u => u.id === usuarioId);
+      return usuario ? `${usuario.nombre} ${usuario.apellido}` : 'Desconocido';
+    }
+    
+  
+    get registrosFiltrados() {
+      if (!this.usuarios || this.usuarios.length === 0) return this.bitacora;
+    
+      const termino = this.searchTerm.toLowerCase();
+      return this.bitacora.filter(r => {
+        const nombreUsuario = this.obtenerNombreUsuario(r.usuario_id).toLowerCase();
+        const coincideBusqueda = `${nombreUsuario} ${r.ip} ${r.accion} ${r.fecha} ${r.hora}`.includes(termino);
+        return this.filtroActivo
+          ? r.accion.toLowerCase().includes('inicio de sesión') && coincideBusqueda
+          : coincideBusqueda;
+      });
+    }
+    
+    // Paginación
+  paginaActual = 1;
+  itemsPorPagina = 5;
 
-    return resultado;
+  get bitacoraPaginados() {
+    const inicio = (this.paginaActual - 1) * this.itemsPorPagina;
+    return this.registrosFiltrados.slice(inicio, inicio + this.itemsPorPagina);
   }
+
+  get totalPaginas() {
+    return Math.ceil(this.registrosFiltrados.length / this.itemsPorPagina);
+  }
+
+  cambiarPagina(direccion: number) {
+    const nueva = this.paginaActual + direccion;
+    if (nueva >= 1 && nueva <= this.totalPaginas) {
+      this.paginaActual = nueva;
+    }
+  }
+
 }

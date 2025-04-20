@@ -26,6 +26,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { ResenaComponent } from './pages/resena/resena.component';
+import { MetodoPagoComponent } from './pages/metodo-pago/metodo-pago.component';
+import { CrearMetodoComponent } from './pages/metodo-pago/crear-metodo/crear-metodo.component';
+import { EditarMetodoComponent } from './pages/metodo-pago/editar-metodo/editar-metodo.component';
 
 export const appConfig = {
   providers: [
@@ -60,7 +63,9 @@ export const appConfig = {
           { path: 'categorias', component: CategoriaComponent },
           { path: 'ventas', component: VentasComponent },
           { path: 'resena',component: ResenaComponent },
-          
+          { path: 'metodos_pago', component:MetodoPagoComponent },
+          { path: 'metodos_pago/crear', component: CrearMetodoComponent },
+          { path: 'metodos_pago/editar/:id', component: EditarMetodoComponent }
         ]
       }
     ])

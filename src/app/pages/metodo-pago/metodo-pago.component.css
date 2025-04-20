@@ -1,0 +1,67 @@
+.metodo-pago {
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .metodo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .controles {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .buscador {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .btn-agregar {
+    background: #4caf50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabla th, .tabla td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .acciones {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-icono {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .btn-icono.editar {
+    color: #4a90e2;
+  }
+  
+  .btn-icono.eliminar {
+    color: #e74c3c;
+  }
+  

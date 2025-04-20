@@ -1,0 +1,15 @@
+<div class="modal-form">
+    <h2>➕ Nuevo Método de Pago</h2>
+  
+    <form (ngSubmit)="guardarMetodo()">
+      <div class="form-group">
+        <label>Nombre del Método</label>
+        <input type="text" [(ngModel)]="metodo.nombre" name="nombre" required />
+      </div>
+  
+      <div class="botones">
+        <button type="submit">Guardar</button>
+        <button type="button" (click)="volver()">Cancelar</button>
+      </div>
+    </form>
+  </div>

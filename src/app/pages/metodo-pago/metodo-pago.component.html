@@ -1,1 +1,30 @@
-<p>metodo-pago works!</p>
+<div class="metodo-pago">
+    <div class="metodo-header">
+      <h2>💳 Métodos de Pago</h2>
+      <div class="controles">
+        <input type="text" [(ngModel)]="filtro" placeholder="🔍 Buscar..." class="buscador" />
+        <a routerLink="/metodos_pago/crear" class="btn-agregar">➕ Agregar método</a>
+      </div>
+    </div>
+  
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let metodo of metodosFiltrados">
+          <td>{{ metodo.id }}</td>
+          <td>{{ metodo.nombre }}</td>
+          <td class="acciones">
+            <button class="btn-icono editar" [routerLink]="['/metodos_pago/editar', metodo.id]">🖊️</button>
+            <button class="btn-icono eliminar" (click)="eliminarMetodo(metodo.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,7 +1,8 @@
 <div class="modal-form">
   <h2>🖊️ Editar producto</h2>
 
-  <form (ngSubmit)="actualizarProducto()" enctype="multipart/form-data">
+  <form *ngIf="producto" (ngSubmit)="actualizarProducto()" enctype="multipart/form-data">
+
     <div class="form-grid">
       <div class="form-group">
         <label>Nombre</label>
@@ -52,11 +53,11 @@
       <label>Imágenes actuales del producto</label>
       <div class="imagenes-preview">
         <div class="imagen-box" *ngFor="let img of imagenesExistentes">
-          <img [src]="img.image_url" alt="imagen producto" />  
+          <img [src]="img.url" alt="imagen producto" />  
           <button type="button" (click)="eliminarImagenExistente(img.id)">×</button>
         </div>
       </div>
-
+      
       <label>Nuevas imágenes</label>
       <div class="dropzone" (click)="abrirInput()" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
         Arrastra tus imágenes aquí o haz clic para seleccionar

@@ -30,15 +30,14 @@
       <tr *ngFor="let p of productosPaginados">
         <td>{{ p.id }}</td>
         <td>
-          <div class="galeria-imagenes">
-            <img
-              [src]="p.imagen_url || 'assets/img/no-image.png'"
-              alt="Imagen del producto"
-              (error)="imagenError($event)"
-            />
-          </div>
-        </td>
-        
+          <img
+            [src]="p.imagenes[0]?.url || 'assets/img/no-image.png'"
+            (error)="imagenError($event)"
+            width="80"
+            height="80"
+            style="object-fit: cover; border-radius: 6px;"
+          />
+        </td>        
         <td>{{ p.nombre }}</td>
         <td>{{ p.precio }} Bs</td>
         <td>{{ p.descripcion }}</td>

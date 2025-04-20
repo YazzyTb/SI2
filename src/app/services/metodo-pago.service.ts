@@ -11,7 +11,7 @@ export class MetodoPagoService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
-    getMetodos(): Observable<any[]> {
+    getMetodoPago(): Observable<any[]> {
       const token = localStorage.getItem('token');
       return this.http.get<any[]>(`${this.apiUrl}/metodos_pago`, {
         headers: {

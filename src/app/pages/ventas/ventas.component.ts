@@ -37,7 +37,7 @@ export class VentasComponent implements OnInit {
   }
 
   cargarMetodosPago() {
-    this.MetodoPagoService.getMetodos().subscribe({
+    this.MetodoPagoService.getMetodoPago().subscribe({
       next: (res) => this.metodosPago = res,
       error: (err) => console.error('Error al cargar métodos de pago', err)
     });

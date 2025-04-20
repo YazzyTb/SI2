@@ -43,33 +43,36 @@ export class EditarProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-
+  
     this.categoriaService.getCategorias().subscribe({
       next: res => this.categorias = res
     });
-
+  
     this.marcaService.getMarcas().subscribe({
       next: res => this.marcas = res
     });
-
+  
     this.productoService.getProductoById(this.id).subscribe({
       next: (res) => {
+        console.log('🟢 Producto recibido:', res); // 👉 Verifica en consola
         this.producto = {
           ...res,
           categoria: res.categoria_id,
           marca: res.marca_id,
-          imagenes: []
+          imagenes: [] // vaciar nuevas imágenes a subir
         };
-
-        if (res.imagen_url) {
-          this.imagenesExistentes = [{ id: res.imagen_id, image_url: res.imagen_url }];
+  
+        if (res.imagenes && Array.isArray(res.imagenes)) {
+          this.imagenesExistentes = res.imagenes;
         }
-        
-        
       },
-      error: err => alert('Error al cargar el producto')
+      error: err => {
+        console.error('❌ Error al cargar producto:', err);
+        alert('Error al cargar el producto');
+      }
     });
   }
+  
 
   abrirInput() {
     const input = document.querySelector('input[type="file"]') as HTMLElement;
@@ -128,18 +131,19 @@ export class EditarProductoComponent implements OnInit {
   actualizarProducto() {
     const formData = new FormData();
     formData.append('nombre', this.producto.nombre);
-    formData.append('precio', String(this.producto.precio ?? 0));
-    formData.append('stock', String(this.producto.stock ?? 0));
-    formData.append('stock_minimo', String(this.producto.stock_minimo ?? 0));
-    formData.append('stock_maximo', String(this.producto.stock_maximo ?? 0));
+    formData.append('precio', this.producto.precio.toString());
+    formData.append('stock', this.producto.stock.toString());
+    formData.append('stock_minimo', this.producto.stock_minimo.toString());
+    formData.append('stock_maximo', this.producto.stock_maximo.toString());
     formData.append('descripcion', this.producto.descripcion);
-    formData.append('marca_id', String(this.producto.marca));
-    formData.append('categoria_id', String(this.producto.categoria));
-
-    this.producto.imagenes.forEach((img: File) => {
-      formData.append('imagenes', img);
+    formData.append('categoria_id', this.producto.categoria.toString());
+    formData.append('marca_id', this.producto.marca.toString());
+  
+    // Agregar imágenes nuevas
+    this.producto.imagenes.forEach((file: File) => {
+      formData.append('imagenes', file); // OJO: el nombre debe coincidir con el backend
     });
-
+  
     this.productoService.actualizarProducto(this.id, formData).subscribe({
       next: () => {
         alert('✅ Producto actualizado correctamente');
@@ -151,7 +155,7 @@ export class EditarProductoComponent implements OnInit {
       }
     });
   }
-
+  
   volver() {
     this.router.navigate(['/inventario']);
   }

@@ -1,0 +1,96 @@
+.descuento {
+    max-width: 1000px;
+    margin: auto;
+    padding: 25px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .controles {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  input[type="text"], select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .btn-agregar {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-agregar:hover {
+    background-color: #45a049;
+  }
+  
+  .tabla-descuentos {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tabla-descuentos th,
+  .tabla-descuentos td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .tabla-descuentos th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .estado {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    display: inline-block;
+  }
+  
+  .estado.activo {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .estado.inactivo {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .icon-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+  }
+  
+  .icon-button.editar:hover {
+    color: #007bff;
+  }
+  
+  .icon-button.eliminar:hover {
+    color: #dc3545;
+  }
+  

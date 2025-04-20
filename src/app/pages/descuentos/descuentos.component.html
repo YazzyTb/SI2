@@ -1,0 +1,53 @@
+<div class="descuento">
+    <div class="header">
+      <h2>🏷️ Descuentos</h2>
+      <div class="controles">
+        <input type="text" [(ngModel)]="busqueda" placeholder="🔍 Buscar descuento..." />
+        <select [(ngModel)]="filtroEstado">
+          <option value="">Todos</option>
+          <option value="activo">Activos</option>
+          <option value="inactivo">Inactivos</option>
+        </select>
+        <a routerLink="/descuentos/crear" class="btn-agregar">➕ Nuevo descuento</a>
+      </div>
+    </div>
+  
+    <table class="tabla-descuentos">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Monto (Bs)</th>
+          <th>Inicio</th>
+          <th>Fin</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of descuentosFiltrados">
+          <td>{{ d.id }}</td>
+          <td>{{ d.nombre }}</td>
+          <td>{{ d.descripcion }}</td>
+          <td>{{ d.monto }}</td>
+          <td>{{ d.fecha_Inicio | date:'shortDate' }}</td>
+          <td>{{ d.fecha_fin | date:'shortDate' }}</td>
+          <td>
+            <span [ngClass]="{
+              'estado': true,
+              'activo': d.estado === 'activo',
+              'inactivo': d.estado === 'inactivo'
+            }">
+              {{ d.estado }}
+            </span>
+          </td>
+          <td>
+            <button class="icon-button editar" [routerLink]="['/descuentos/editar', d.id]">🖊️</button>
+            <button class="icon-button eliminar" (click)="eliminarDescuento(d.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

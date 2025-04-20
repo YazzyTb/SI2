@@ -29,6 +29,9 @@ import { ResenaComponent } from './pages/resena/resena.component';
 import { MetodoPagoComponent } from './pages/metodo-pago/metodo-pago.component';
 import { CrearMetodoComponent } from './pages/metodo-pago/crear-metodo/crear-metodo.component';
 import { EditarMetodoComponent } from './pages/metodo-pago/editar-metodo/editar-metodo.component';
+import { DescuentosComponent } from './pages/descuentos/descuentos.component';
+import { CrearDescuentoComponent } from './pages/descuentos/crear-descuento/crear-descuento.component';
+import { EditarDescuentoComponent } from './pages/descuentos/editar-descuento/editar-descuento.component';
 
 export const appConfig = {
   providers: [
@@ -65,7 +68,10 @@ export const appConfig = {
           { path: 'resena',component: ResenaComponent },
           { path: 'metodos_pago', component:MetodoPagoComponent },
           { path: 'metodos_pago/crear', component: CrearMetodoComponent },
-          { path: 'metodos_pago/editar/:id', component: EditarMetodoComponent }
+          { path: 'metodos_pago/editar/:id', component: EditarMetodoComponent },
+          { path: 'descuentos', component:DescuentosComponent },
+          { path: 'descuentos/crear', component:CrearDescuentoComponent },
+          { path: 'descuentos/editar/:id', component:EditarDescuentoComponent },
         ]
       }
     ])

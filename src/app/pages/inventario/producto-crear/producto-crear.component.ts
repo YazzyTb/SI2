@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,10 +13,9 @@ import { MarcaService } from '../../../services/marca.service';
   templateUrl: './producto-crear.component.html',
   styleUrls: ['./producto-crear.component.css']
 })
-export class ProductoCrearComponent {
-  categorias:any = [];
-  marcas: any = [];
-
+export class ProductoCrearComponent implements OnInit {
+  categorias: any[] = [];
+  marcas: any[] = [];
 
   producto = {
     nombre: '',
@@ -25,8 +24,8 @@ export class ProductoCrearComponent {
     stockMaximo: 0,
     precio: 0,
     descripcion: '',
-    categoria: '',
-    marca: '',
+    categoria: '', // texto: el backend se encarga de convertir a ID
+    marca: '',     // texto: el backend se encarga de convertir a ID
     imagenes: [] as File[]
   };
 
@@ -38,18 +37,18 @@ export class ProductoCrearComponent {
     private categoriaService: CategoriaService,
     private marcaService: MarcaService
   ) {}
+
   ngOnInit(): void {
     this.categoriaService.getCategorias().subscribe({
       next: (res) => this.categorias = res,
-      error: (err) => console.error('Error al cargar categorías', err)
+      error: (err) => console.error('❌ Error al cargar categorías', err)
     });
-  
+
     this.marcaService.getMarcas().subscribe({
       next: (res) => this.marcas = res,
-      error: (err) => console.error('Error al cargar marcas', err)
+      error: (err) => console.error('❌ Error al cargar marcas', err)
     });
   }
-  
 
   abrirInput() {
     const input = document.querySelector('input[type="file"]') as HTMLElement;
@@ -96,17 +95,17 @@ export class ProductoCrearComponent {
     const formData = new FormData();
     formData.append('nombre', this.producto.nombre);
     formData.append('stock', this.producto.stock.toString());
-    formData.append('stockMinimo', this.producto.stockMinimo.toString());
-    formData.append('stockMaximo', this.producto.stockMaximo.toString());
+    formData.append('stock_minimo', this.producto.stockMinimo.toString());
+    formData.append('stock_maximo', this.producto.stockMaximo.toString());
     formData.append('precio', this.producto.precio.toString());
     formData.append('descripcion', this.producto.descripcion);
-    formData.append('categoria', this.producto.categoria);
-    formData.append('marca', this.producto.marca);
-
-    this.producto.imagenes.forEach((img, index) => {
+    formData.append('categoria_id', this.producto.categoria);  // ← este es el cambio importante
+    formData.append('marca_id', this.producto.marca);          // ← este también
+  
+    this.producto.imagenes.forEach((img) => {
       formData.append('imagenes', img);
     });
-
+  
     this.productoService.crearProducto(formData).subscribe({
       next: () => {
         alert('✅ Producto creado con éxito');
@@ -114,10 +113,12 @@ export class ProductoCrearComponent {
       },
       error: (err) => {
         console.error('Error al crear producto:', err);
-        alert('❌ Error al crear el producto');
+        alert('❌ Error del servidor: ' + err.error?.error || 'No se pudo crear el producto');
       }
     });
   }
+  
+  
 
   volver() {
     this.router.navigate(['/inventario']);

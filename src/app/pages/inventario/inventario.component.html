@@ -1,60 +1,73 @@
-<div class="inventario-wrapper">
+<div class="inventario">
   <div class="inventario-header">
-    <label>
-      Mostrando
-      <select [(ngModel)]="itemsPorPagina" (change)="paginaActual = 1">
-        <option *ngFor="let n of [5, 10, 15]" [value]="n">{{ n }}</option>
-      </select>
-      registros por página
-    </label>
-    <input [(ngModel)]="filtro" placeholder="Buscar..." class="buscador" />
+    <h2>📦 Inventario</h2>
+    <div class="inventario-controles">
+      <input
+        type="text"
+        [(ngModel)]="filtro"
+        placeholder="🔍 Buscar producto..."
+        class="buscador"
+      />
+      <a routerLink="/inventario/crear" class="btn-agregar">➕ Nuevo producto</a>
+    </div>
   </div>
 
-  <table class="inventario-tabla">
+  <table class="inventario-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th>IMAGEN</th>
-        <th>NOMBRE</th>
-        <th>DESCRIPCIÓN</th>
-        <th>PRECIO</th>
-        <th>STOCK</th>
-        <th>MARCA</th>
-        <th>CATEGORÍA</th>
-        <th>ACCIONES</th>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+        <th>Stock</th>
+        <th>Marca</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let p of productosPaginados; let i = index" [class.alt]="i % 2 === 1">
+      <tr *ngFor="let p of productosPaginados">
         <td>{{ p.id }}</td>
         <td>
           <div class="galeria-imagenes">
             <img
-              *ngFor="let img of p.imagenes || []"
-              [src]="img.image_url"
-              width="100"
+              [src]="p.imagen_url || 'assets/img/no-image.png'"
+              alt="Imagen del producto"
               (error)="imagenError($event)"
             />
           </div>
-        </td>               
-
+        </td>
+        
         <td>{{ p.nombre }}</td>
-        <td>{{ p.descripcion | slice:0:80 }}{{ p.descripcion.length > 80 ? '...' : '' }}</td>
-        <td>{{ p.precio | currency:'$' }}</td>
+        <td>{{ p.precio }} Bs</td>
+        <td>{{ p.descripcion }}</td>
         <td>{{ p.stock }}</td>
         <td>{{ obtenerNombreMarca(p.marca_id) }}</td>
         <td>{{ obtenerNombreCategoria(p.categoria_id) }}</td>
         <td class="acciones">
-          <button class="btn-editar" [routerLink]="['/inventario/editar', p.id]">✏️</button>
-          <button class="btn-eliminar" (click)="eliminarProducto(p.id)">🗑️</button>
+          <button
+            class="icon-button editar"
+            [routerLink]="['/inventario/editar', p.id]"
+          >
+            🖊️
+          </button>
+          <button (click)="eliminarProducto(p.id)">🗑️</button>
         </td>
       </tr>
     </tbody>
   </table>
 
   <div class="paginacion">
-    <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">⬅️</button>
+    <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">
+      ◀
+    </button>
     <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
-    <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">➡️</button>
+    <button
+      (click)="cambiarPagina(1)"
+      [disabled]="paginaActual === totalPaginas"
+    >
+      ▶
+    </button>
   </div>
 </div>

@@ -7,7 +7,6 @@ import { ClienteService } from '../../services/cliente.service';
 import { CategoriaService } from '../../services/categoria.service';
 import { MarcaService } from '../../services/marca.service';
 
-
 @Component({
   selector: 'app-inventario',
   standalone: true,
@@ -21,9 +20,8 @@ export class InventarioComponent implements OnInit {
   clientes: any[] = [];
   categorias: any[] = [];
   marcas: any[] = [];
-  metodosPago: any[] = [];
   paginaActual: number = 1;
-  itemsPorPagina: number = 10;
+  itemsPorPagina: number = 5;
 
   constructor(
     private productoService: ProductoService,
@@ -53,25 +51,28 @@ export class InventarioComponent implements OnInit {
       next: (res) => this.marcas = res,
       error: () => alert('Error al cargar marcas')
     });
-    
   }
 
   imagenError(event: Event) {
     const element = event.target as HTMLImageElement;
-    element.src = 'https://via.placeholder.com/100x100?text=Sin+imagen';
+    element.src = 'assets/img/no-image.png';
   }
-  
 
   eliminarProducto(id: number) {
     if (confirm('¿Deseas eliminar este producto?')) {
       this.productoService.eliminarProducto(id).subscribe({
         next: () => {
           this.productos = this.productos.filter(p => p.id !== id);
+          alert('Producto eliminado con éxito');
         },
-        error: () => alert('Error al eliminar producto')
+        error: (err) => {
+          console.error('Error al eliminar producto:', err);
+          alert('No se pudo eliminar el producto.');
+        }
       });
     }
   }
+  
 
   obtenerNombreCliente(id: number): string {
     const cliente = this.clientes.find(c => c.id === id);
@@ -87,10 +88,6 @@ export class InventarioComponent implements OnInit {
     const categoria = this.categorias.find(c => c.id === id);
     return categoria ? categoria.nombre : 'Sin categoría';
   }
-  obtenerUrlImagen(producto: any): string {
-    return producto.imagenes?.length ? producto.imagenes[0].image_url : 'assets/img/no-image.png';
-  }
-  
 
   get productosFiltrados() {
     return this.productos.filter(p =>
@@ -113,4 +110,6 @@ export class InventarioComponent implements OnInit {
       this.paginaActual = nueva;
     }
   }
+
+  
 }

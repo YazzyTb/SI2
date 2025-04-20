@@ -132,3 +132,14 @@
   button:hover {
     background: #3366cc;
   }
+  .modal-form {
+    background: #fff;
+    max-width: 800px;
+    height: 90vh;              /* Altura máxima en viewport */
+    overflow-y: auto;          /* Activa scroll vertical */
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    font-family: 'Segoe UI', sans-serif;
+  }

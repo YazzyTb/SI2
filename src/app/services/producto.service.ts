@@ -18,8 +18,11 @@ export class ProductoService {
 
   // Obtener todos los productos
   getProductos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl, {
-      headers: this.getAuthHeaders()
+    const token = localStorage.getItem('token');
+    return this.http.get<any[]>(`${this.apiUrl}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
   }
 
@@ -32,10 +35,23 @@ export class ProductoService {
 
   // Eliminar producto
   eliminarProducto(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http.delete(`${this.apiUrl}/${id}`, {
-      headers: this.getAuthHeaders()
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
   }
+  
+  eliminarImagenProducto(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.delete(`https://back-ecommerce-xot1.onrender.com/imagenes_producto/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+  
 
   // Obtener por ID
   getProductoById(id: number): Observable<any> {
@@ -45,9 +61,13 @@ export class ProductoService {
   }
 
   // Actualizar producto
-  actualizarProducto(id: number, productoData: FormData): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, productoData, {
-      headers: this.getAuthHeaders()
+  actualizarProducto(id: number, data: FormData): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.put(`${this.apiUrl}/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
   }
+  
 }

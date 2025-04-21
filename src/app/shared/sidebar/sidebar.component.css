@@ -11,9 +11,9 @@
   overflow-y: auto;
   transition: transform 0.3s ease-in-out;
   transform: translateX(0);
-
   z-index: 999;
 }
+
 .sidebar.hidden {
   transform: translateX(-100%);
 }
@@ -65,28 +65,49 @@
   transition: transform 0.3s ease;
 }
 
+/* SOLO mostrar el sidebar cuando sea visible (controlado por TS) */
 @media (max-width: 970px) {
   .sidebar {
     transform: translateX(-100%);
   }
-  .hamburger {
-    display: none;
-  }
 
-
-  .sidebar ul {
-    flex-direction: column;
+  .sidebar:not(.hidden) {
+    transform: translateX(0) !important;
   }
 }
+
 .hamburger {
+  display: none;
   position: fixed;
-  top: 10px;
-  left: 10px;
-  font-size: 26px;
+  top: 15px;
+  left: 15px;
   background-color: #ed3f54;
   color: white;
   border: none;
-  padding: 10px;
-  z-index: 1000;
-  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 22px;
+  border-radius: 5px;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  background-color: #c93445;
+}
+
+@media (max-width: 970px) {
+  .hamburger {
+    display: block;
+  }
+}
+
+main.contenido {
+  margin-left: 280px;
+  padding: 20px;
+}
+
+@media (max-width: 970px) {
+  main.contenido {
+    margin-left: 2px;
+  }
 }

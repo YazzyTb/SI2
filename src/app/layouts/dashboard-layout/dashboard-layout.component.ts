@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 
@@ -12,6 +12,7 @@ import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 export class DashboardLayoutComponent {
   sidebarVisible = true;
   isMobile = false;
+  
 
   ngOnInit() {
     this.checkScreen();

@@ -1,8 +1,8 @@
-<!-- Botón hamburguesa -->
+<!-- Botón hamburguesa 
 <button class="hamburger" (click)="toggleSidebar()">☰</button>
-
+-->
 <!-- Sidebar con visibilidad -->
-<app-sidebar [isVisible]="sidebarVisible"></app-sidebar>
+<app-sidebar [class.visible]="sidebarVisible"></app-sidebar>
 
 <main class="contenido">
   <router-outlet></router-outlet>

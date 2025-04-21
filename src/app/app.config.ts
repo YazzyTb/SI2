@@ -32,6 +32,7 @@ import { EditarMetodoComponent } from './pages/metodo-pago/editar-metodo/editar-
 import { DescuentosComponent } from './pages/descuentos/descuentos.component';
 import { CrearDescuentoComponent } from './pages/descuentos/crear-descuento/crear-descuento.component';
 import { EditarDescuentoComponent } from './pages/descuentos/editar-descuento/editar-descuento.component';
+import { CrearVentasComponent } from './pages/ventas/crear-ventas/crear-ventas.component';
 
 export const appConfig = {
   providers: [
@@ -65,6 +66,7 @@ export const appConfig = {
 
           { path: 'categorias', component: CategoriaComponent },
           { path: 'ventas', component: VentasComponent },
+          { path: 'ventas/crear', component: CrearVentasComponent },
           { path: 'resena',component: ResenaComponent },
           { path: 'metodos_pago', component:MetodoPagoComponent },
           { path: 'metodos_pago/crear', component: CrearMetodoComponent },

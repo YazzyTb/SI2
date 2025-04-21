@@ -1,8 +1,9 @@
-<aside class="sidebar" [class.hidden]="!isVisible">
+<button class="hamburger" (click)="toggleSidebar()">☰</button>
+<aside class="sidebar" [class.hidden]="!sidebarVisible">
   <nav>
     <h2 class="brand">🛒 Smarth Shop</h2>
     <ul>
-      <li><a routerLink="/bitacora">📋 Bitácora</a></li>
+      <li><a routerLink="/bitacora"routerLinkActive="activo">📋 Bitácora</a></li>
 
       <li>
         <div class="dropdown-toggle" (click)="toggleDropdown('empleados')">
@@ -37,7 +38,6 @@
         </div>
         <ul *ngIf="dropdowns?.['ventas']">
           <li><a routerLink="/ventas"> Lista de ventas</a></li>
-          <li><a routerLink="/resena"> Reseña</a></li>
           <li><a routerLink="/descuentos"> Descuentos</a></li>
           <li><a routerLink="/metodos_pago"> Metodo de Pago</a></li>
         </ul>

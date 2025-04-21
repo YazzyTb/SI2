@@ -1,46 +1,56 @@
 <div class="ventas-container">
-    <h2>🧾 Gestión de Ventas</h2>
-  
-    <div class="filtros">
-      <input type="text" [(ngModel)]="filtro" placeholder="🔍 Buscar venta..." class="buscador" />
-    </div>
-  
-    <table class="tabla">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Cliente</th>
-          <th>Fecha</th>
-          <th>Importe Total</th>
-          <th>Método de Pago</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let v of paginadas">
-          <td>{{ v.id }}</td>
-          <td>{{ v.cliente?.nombre }} {{ v.cliente?.apellido }}</td>
-          <td>{{ v.fecha }}</td>
-          <td>{{ v.importe_total | currency:'Bs. ' }}</td>
-          <td>{{ v.metodo_pago?.nombre || 'N/A' }}</td>
-          <td>
-            <span [ngClass]="{ 'activo': v.estado === 'completado', 'inactivo': v.estado !== 'completado' }">
-              {{ v.estado }}
-            </span>
-          </td>
-          <td class="acciones">
-            <button title="Ver" class="icon-button ver" [routerLink]="['/ventas', v.id]">👁️</button>
-            <button title="Anular" class="icon-button eliminar" (click)="anularVenta(v.id)">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <div class="paginacion">
-      <button [disabled]="paginaActual === 1" (click)="cambiarPagina(-1)">⬅️ Anterior</button>
-      <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
-      <button [disabled]="paginaActual === totalPaginas" (click)="cambiarPagina(1)">Siguiente ➡️</button>
-    </div>
+  <h2>🧾 Gestión de Ventas</h2>
+
+  <div class="filtros">
+    <input
+      type="text"
+      [(ngModel)]="filtro"
+      placeholder="🔍 Buscar venta por cliente, fecha o estado..."
+      class="buscador"
+    />
+    <button routerLink="/ventas/crear" class="btn-agregar">➕ Agregar rol</button>
   </div>
-  
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Importe Total</th>
+        <th>Método de Pago</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of paginadas">
+        <td>{{ v.id }}</td>
+        <td>{{ obtenerNombreCliente(v.cliente_id) }}</td>
+        <td>{{ v.fecha }}</td>
+        <td>{{ v.importe_total | currency:'Bs. ' }}</td>
+        <td>{{ obtenerNombreMetodoPago(v.metodo_pago_id) }}</td>
+        <td>
+          <span
+            [ngClass]="{
+              'estado-activo': v.estado === 'completado',
+              'estado-inactivo': v.estado !== 'completado'
+            }"
+          >
+            {{ v.estado }}
+          </span>
+        </td>
+        <td class="acciones">
+          <button title="Ver" class="icon-button ver" [routerLink]="['/ventas', v.id]">👁️</button>
+          <button title="Anular" class="icon-button eliminar" (click)="anularVenta(v.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="paginacion">
+    <button [disabled]="paginaActual === 1" (click)="cambiarPagina(-1)">⬅️ Anterior</button>
+    <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+    <button [disabled]="paginaActual === totalPaginas" (click)="cambiarPagina(1)">Siguiente ➡️</button>
+  </div>
+</div>
